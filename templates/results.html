@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% block head %}
+
+{% endblock %}
+
+{% block body %}
+<div class="container">
+  <script>
+  window.onload = function() {
+  var chart = new CanvasJS.Chart("chartContainer", {
+    animationEnabled: true,
+    title: {
+      text: "Sentiment for #{{ hashtag }}"
+    },
+    data: [{
+      type: "pie",
+      startAngle: 240,
+      yValueFormatString: "##0.00\"%\"",
+      indexLabel: "{label} {y}",
+      dataPoints: [
+        {y: {{ positive }}, label: "Positive"},
+        {y: {{ negative }}, label: "Negative"}
+      ]
+    }]
+  });
+  chart.render();
+  }
+  </script>
+  </div>
+  <div id="chartContainer" style="height: 370px; width: 100%;"></div>
+  <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+  <div class="container">
+  <form action="/result" method="POST">
+    <div class="form-group">
+    <label for = "text"> Hashtag to search for: </label>
+    <input class="form-control" type="text" name="text" placeholder="Type your text here...">
+    </div>
+    <button class="btn btn-primary" type="submit" name="submit">Submit</button>
+  </form>
+  </div>
+  <div class="container">
+    <h4> {{ messagedisplay }} </h4>
+  </div>
+  <div class="overflow-auto">
+  {% for message,label in display.items() %}
+  <div class="container">
+    <div class="card">
+      <div class="card-body">
+        <h5 class= "card-title"> {{ message }} </h5>
+        <p class="card-text"> Label : {{ label }} </p>
+      </div>
+  </div>
+  </div>
+  </div>
+  {% endfor %}
+
+{% endblock %}

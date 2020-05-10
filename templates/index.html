@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block head %}
+<h1>
+  <div class="container">
+  <div class="mx-auto">
+  Twitter Sentiment Analysis
+  </div>
+  </div>
+</h1>
+{% endblock %}
+
+{% block body %}
+<div class="container">
+<div class="w-75">
+<form action="/result" method="POST">
+  <div class="form-group">
+  <label for = "text"> Hashtag to search for: </label>
+  <input class="form-control" type="text" name="text" placeholder="Type your text here...">
+  </div>
+  <button class="btn btn-primary" type="submit" name="submit">Submit</button>
+</form>
+</div>
+</div>
+{% endblock %}
