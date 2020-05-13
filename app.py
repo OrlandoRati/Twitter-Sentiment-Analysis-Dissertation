@@ -52,7 +52,7 @@ def predict():
         tweets = results.json()
 
         #Creating an array of tweets
-        messages = [BeautifulSoup(tweet['text'], 'html5lib').get_text() for tweet in tweets['statuses']]
+        messages = [BeautifulSoup(tweet['text'], 'html.parser').get_text() for tweet in tweets['statuses']]
 
         tweet_display={}
 
