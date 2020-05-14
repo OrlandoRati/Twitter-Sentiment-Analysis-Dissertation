@@ -43,7 +43,10 @@ def predict():
 
     if request.method == "POST":
         hashtag=request.form["text"]
-
+        hashtag=''.join(hashtag.split())
+        if not hashtag:
+            alert="The hashtag cannot be empty!"
+            return render_template('index.html', alert=alert)
         # Parameters for the query of the tweets
         params = {'q': hashtag + str(" -filter:retweets -filter:replies"), 'count': 100, 'lang': 'en',  'result_type': 'recent'}
         results = requests.get(url_rest, params=params, auth=auth)
